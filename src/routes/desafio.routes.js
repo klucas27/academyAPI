@@ -3,6 +3,10 @@ import { gerarPergunta } from '../services/openai.service.js';
 
 const router = express.Router();
 
+router.get('/test', (req, res) => {
+  res.json({ mensagem: 'API do Academy está online!' });
+});
+
 router.post('/', async (req, res) => {
 
   const prompt = req.body.prompt;
@@ -19,5 +23,6 @@ router.post('/', async (req, res) => {
     res.status(500).json({ erro: e.message });
   }
 });
+
 
 export default router;
