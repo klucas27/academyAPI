@@ -14,7 +14,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(cors({
-  origin: 'https://academygame.netlify.app/',
+  origin: 'https://academygame.netlify.app',
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: false
