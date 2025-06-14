@@ -1,5 +1,5 @@
 import express from 'express';
-import { gerarPergunta } from '../services/openai.service.js';
+import { gerarPergunta } from '../services/openai.service';
 
 const router = express.Router();
 
