@@ -8,6 +8,11 @@ import desafioRoutes from './routes/desafio.routes.js';
 
 import usersInfos from './routes/users.routes.js';
 
+import {createTableUser} from './database/userBD.js'
+
+// Create Tables
+createTableUser()
+
 
 // console.log("Chave OpenAI:", process.env.OPENAI_API_KEY);  // Adicione isso para verificar se a chave está sendo carregada
 

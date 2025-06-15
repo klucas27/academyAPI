@@ -10,7 +10,6 @@ const SECRET_KEY = process.env.JWT_SECRET || "KFJJWJEI83283UFH@@KFJU84]";
 
 router.use(express.json())
 
-
 router.get('/test', (req, res) => {
     res.json({ mensagem: 'API do Academy está online!, endpoit: users' });
 });

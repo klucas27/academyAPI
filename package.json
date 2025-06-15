@@ -17,6 +17,7 @@
     "express": "^5.1.0",
     "json5": "^2.2.3",
     "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.14.1",
     "openai": "^4.103.0"
   },
   "devDependencies": {
