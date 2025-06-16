@@ -4,9 +4,11 @@ import jwt from 'jsonwebtoken';
 
 import { verifyToken } from '../middlewares/auth.middleware.js';
 
-import { insertUser, getUserByUsername } from '../database/userBD.js';
-
-// import { getUserByUsername } from '../database/userBD.js';
+import {        // importação de configs do BD
+    insertUser,
+    getUserByUsername,
+    updateUserData
+} from '../database/userBD.js';
 
 
 import bcrypt from 'bcrypt';
@@ -26,14 +28,10 @@ router.get('/test', (req, res) => {
 // ROTA PARA REGISTRAR USUARIO!
 router.post('/register', async (req, res) => {
     let { username, passwd } = req.body;
-    // console.log(username)
-    // console.log(passwd)
 
     if (!username || !passwd) {
         return res.status(400).json({ sucesso: false, mensagem: "Preencha todos os campos." });
     }
-    // console.log('2')
-
 
     try {
 
@@ -96,13 +94,47 @@ router.post('/userGet', async (req, res) => {
 });
 
 // ROTA PRIVADA COM TOKEN PARA VERIFICAÇÃO
-router.post('/private', verifyToken, (req, res) => {
-    res.json({
-        sucesso: true,
-        mensagem: `Bem-vindo ${req.user.user}, você acessou uma rota protegida!`,
-        life: `4454 Vidas`,
-        points: `54545 pts`
+router.get('/private', verifyToken, (req, res) => {
+
+    const user = req.user.user
+
+    getUserByUsername(user, async (err, usuario) => {
+        if (err) {
+            return res.status(500).json({ sucesso: false, mensagem: "Erro interno ao buscar usuário." });
+        }
+
+        if (!usuario) {
+            return res.status(401).json({ sucesso: false, mensagem: "Usuário ou senha incorretos!" });
+        }
+
+        res.json({
+            sucesso: true,
+            mensagem: `Bem-vindo ${req.user.user}, você acessou uma rota protegida!`,
+            usuario: {
+                id: usuario.id,
+                username: usuario.username,
+                life: `${usuario.life} Vidas`,
+                points: `${usuario.points} Pts`
+            }
+        });
     });
 });
+
+router.post('/updateStats', verifyToken, (req, res) => {
+    const { username, life, points } = req.body;
+
+    if (!username) {
+        return res.status(400).json({ sucesso: false, mensagem: "Dados incompletos." });
+    }
+
+    updateUserData(username, life, points, (err, result) => {
+        if (err) {
+            return res.status(500).json({ sucesso: false, mensagem: "Erro ao atualizar usuário." });
+        }
+
+        res.json({ sucesso: true, mensagem: "Dados atualizados com sucesso!" });
+    });
+});
+
 
 export default router;

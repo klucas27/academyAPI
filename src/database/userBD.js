@@ -43,4 +43,36 @@ export function getUserByUsername(username, callback) {
         callback(null, results[0]);
     });
 }
+
+// Atualizar os Pontos e vidas dos jogadores
+export function updateUserData(username, life, points, callback) {
+
+
+    if (points == null) {
+        let sql = `UPDATE users SET life = life + ? WHERE username = ?`;
+
+        bd.query(sql, [life, username], (err, result) => {
+            if (err) return callback(err);
+            callback(null, result);
+        });
+
+    } if (life == null) {
+        let sql = `UPDATE users SET points = points + ? WHERE username = ?`;
+        bd.query(sql, [points, username], (err, result) => {
+            if (err) return callback(err);
+            callback(null, result);
+        });
+
+    } else {
+
+        return
+
+    }
+    // const sql = `UPDATE users SET life = ?, points = ? WHERE username = ?`;
+
+    // bd.query(sql, [life, points, username], (err, result) => {
+    //     if (err) return callback(err);
+    //     callback(null, result);
+    // });
+}
 export { createTableUser }
