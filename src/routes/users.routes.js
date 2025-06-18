@@ -62,7 +62,7 @@ router.post('/userGet', async (req, res) => {
         return res.status(400).json({ sucesso: false, mensagem: "Preencha todos os campos." });
     }
 
-    getUserByUsername(user, async (err, usuario) => {
+    await getUserByUsername(user, async (err, usuario) => {
         if (err) {
             return res.status(500).json({ sucesso: false, mensagem: "Erro interno ao buscar usuário." });
         }
