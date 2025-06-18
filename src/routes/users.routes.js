@@ -70,6 +70,7 @@ router.post('/userGet', async (req, res) => {
             return res.status(401).json({ sucesso: false, mensagem: "Usuário ou senha incorretos!" });
         }
 
+        // Corrigido: o campo correto é 'passwd'
         const senhaCorreta = await bcrypt.compare(passwd, usuario.passwd);
 
         if (!senhaCorreta) {
