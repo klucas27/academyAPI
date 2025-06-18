@@ -63,6 +63,7 @@ router.post('/userGet', async (req, res) => {
 
     getUserByUsername(user, async (err, usuario) => {
         if (err) {
+            console.log(err)
             return res.status(500).json({ sucesso: false, mensagem: "Erro interno ao buscar usuário." });
         }
 

@@ -16,7 +16,7 @@ export function createTableUser() {
     bd.query(sql, (err, result) => {
         if (err) throw err;
         console.log("Tabela 'users' criada com sucesso!");
-        bd.end();
+        // bd.end();
     });
 
 }
