@@ -70,4 +70,9 @@ export function updateUserData(username, life, points, callback) {
     }
 }
 
-export { createTableUser }
+export {
+    createTableUser,
+    getUserByUsername,
+    updateUserData,
+    insertUser
+}
