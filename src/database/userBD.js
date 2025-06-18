@@ -33,7 +33,7 @@ export function insertUser({ username, hashedPassword, life = 5, points = 0, sta
     });
 }
 
-// Verificar usuario
+// Verificar usuário
 export function getUserByUsername(username, callback) {
     const sql = `SELECT * FROM users WHERE username = ?`;
     bd.query(sql, [username], (err, results) => {

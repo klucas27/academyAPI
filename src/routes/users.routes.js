@@ -1,28 +1,17 @@
 import express from 'express';
-
 import jwt from 'jsonwebtoken';
-
 import { verifyToken } from '../middlewares/auth.middleware.js';
-
-import {        // importação de configs do BD
-    insertUser,
-    getUserByUsername,
-    updateUserData
-} from '../database/userBD.js';
-
-
+import { insertUser, getUserByUsername, updateUserData } from '../database/userBD.js';
 import bcrypt from 'bcrypt';
 
 const router = express.Router();
-
 const SECRET_KEY = process.env.JWT_SECRET || "KFJJWJEI83283UFH@@KFJU84]";
 
-router.use(express.json())
+router.use(express.json());
 
 router.get('/test', (req, res) => {
-    res.json({ mensagem: 'API do Academy está online!, endpoit: users' });
+    res.json({ mensagem: 'API do Academy está online!, endpoint: users' });
 });
-
 
 // ROTA PARA REGISTRAR USUARIO!
 router.post('/register', async (req, res) => {
@@ -33,7 +22,6 @@ router.post('/register', async (req, res) => {
     }
 
     try {
-
         const hashedPassword = await bcrypt.hash(passwd, 10);
 
         insertUser({ username, hashedPassword }, (err, result) => {
@@ -52,7 +40,6 @@ router.post('/register', async (req, res) => {
     }
 });
 
-
 // ROTA PARA VERIFICAR USUARIO!
 router.post('/userGet', async (req, res) => {
     const { user, passwd } = req.body;
@@ -63,7 +50,7 @@ router.post('/userGet', async (req, res) => {
 
     getUserByUsername(user, async (err, usuario) => {
         if (err) {
-            console.log(err)
+            console.log(err);
             return res.status(500).json({ sucesso: false, mensagem: "Erro interno ao buscar usuário." });
         }
 
@@ -71,7 +58,6 @@ router.post('/userGet', async (req, res) => {
             return res.status(401).json({ sucesso: false, mensagem: "Usuário ou senha incorretos!" });
         }
 
-        // Corrigido: o campo correto é 'passwd'
         const senhaCorreta = await bcrypt.compare(passwd, usuario.passwd);
 
         if (!senhaCorreta) {
@@ -96,8 +82,7 @@ router.post('/userGet', async (req, res) => {
 
 // ROTA PRIVADA COM TOKEN PARA VERIFICAÇÃO
 router.get('/private', verifyToken, (req, res) => {
-
-    const user = req.user.user
+    const user = req.user.user;
 
     getUserByUsername(user, async (err, usuario) => {
         if (err) {
@@ -136,6 +121,5 @@ router.post('/updateStats', verifyToken, (req, res) => {
         res.json({ sucesso: true, mensagem: "Dados atualizados com sucesso!" });
     });
 });
-
 
 export default router;

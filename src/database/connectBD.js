@@ -15,13 +15,13 @@ const pool = mysql.createPool({
 });
 
 
-// Conectar ao banco
-pool.connect((err) => {
-  if (err) {
-    console.error('Erro na conexão:', err.stack);
-    return;
-  }
-  console.log('Conectado ao MySQL como ID', pool.threadId);
-});
+// // Conectar ao banco
+// pool.connect((err) => {
+//   if (err) {
+//     console.error('Erro na conexão:', err.stack);
+//     return;
+//   }
+//   console.log('Conectado ao MySQL como ID', pool.threadId);
+// });
 
 export default pool;
