@@ -1,7 +1,7 @@
 import bd from './connectBD.js'
 
 
-function createTableUser() {
+export function createTableUser() {
 
     const sql = `
         CREATE TABLE IF NOT EXISTS users (
@@ -16,7 +16,7 @@ function createTableUser() {
     bd.query(sql, (err, result) => {
         if (err) throw err;
         console.log("Tabela 'users' criada com sucesso!");
-        // bd.end();
+        bd.end();
     });
 
 }
@@ -68,11 +68,4 @@ export function updateUserData(username, life, points, callback) {
     } else {
         callback(new Error("Informe pelo menos life ou points para atualizar."));
     }
-}
-
-export {
-    createTableUser,
-    getUserByUsername,
-    updateUserData,
-    insertUser
 }
