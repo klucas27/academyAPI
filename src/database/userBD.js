@@ -34,14 +34,13 @@ export function insertUser({ username, hashedPassword, life = 5, points = 0, sta
 }
 
 // Verificar usuario
-export function getUserByUsernameAsync(username) {
-    return new Promise((resolve, reject) => {
-        const sql = `SELECT * FROM users WHERE username = ?`;
-        bd.query(sql, [username], (err, results) => {
-            if (err) return reject(err);
-            if (results.length === 0) return resolve(null);
-            resolve(results[0]);
-        });
+export function getUserByUsername(username, callback) {
+    const sql = `SELECT * FROM users WHERE username = ?`;
+
+    bd.query(sql, [username], (err, results) => {
+        if (err) return callback(err);
+        if (results.length === 0) return callback(null, null); // Usuário não encontrado
+        callback(null, results[0]);
     });
 }
 

@@ -13,7 +13,6 @@ import {        // importação de configs do BD
 
 import bcrypt from 'bcrypt';
 
-
 const router = express.Router();
 
 const SECRET_KEY = process.env.JWT_SECRET || "KFJJWJEI83283UFH@@KFJU84]";
@@ -62,7 +61,7 @@ router.post('/userGet', async (req, res) => {
         return res.status(400).json({ sucesso: false, mensagem: "Preencha todos os campos." });
     }
 
-    await getUserByUsername(user, async (err, usuario) => {
+    getUserByUsername(user, async (err, usuario) => {
         if (err) {
             return res.status(500).json({ sucesso: false, mensagem: "Erro interno ao buscar usuário." });
         }
