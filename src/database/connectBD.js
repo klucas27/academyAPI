@@ -1,3 +1,5 @@
+// Conexão com o banco de dados MySQL usando variáveis de ambiente .env (Configurar no servidor, esta incluido no .;gitignore)
+
 import mysql from 'mysql2';
 import dotenv from 'dotenv'
 
@@ -13,15 +15,5 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   queueLimit: 0
 });
-
-
-// // Conectar ao banco
-// pool.connect((err) => {
-//   if (err) {
-//     console.error('Erro na conexão:', err.stack);
-//     return;
-//   }
-//   console.log('Conectado ao MySQL como ID', pool.threadId);
-// });
 
 export default pool;

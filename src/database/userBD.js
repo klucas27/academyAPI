@@ -1,7 +1,15 @@
+/**
+ * Conexão com banco de dados
+ * Contem funções para criar tabela, adicionar usuarios, atualizar e verificar se usuario existe no banco
+ */
+
 import bd from './connectBD.js'
 
 
 export function createTableUser() {
+    /**
+     * Cria tabela CASO ela não exista!
+     */
 
     const sql = `
         CREATE TABLE IF NOT EXISTS users (

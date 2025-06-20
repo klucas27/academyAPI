@@ -1,3 +1,7 @@
+/**
+ * Rota para acesso à API da openAI
+ */
+
 import express from 'express';
 import { gerarPergunta } from '../services/openai.service.js';
 

@@ -1,3 +1,5 @@
+// Autenticador com jwt, este arquivo serve para verificar o token e retornar para o front se esta autorizado!
+
 import jwt from 'jsonwebtoken';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'KFJJWJEI83283UFH@@KFJU84]';

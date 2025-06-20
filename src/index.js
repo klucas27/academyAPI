@@ -4,7 +4,7 @@ import './loadEnv.js';
 
 import express from 'express';
 import cors  from 'cors';
-import desafioRoutes from './routes/desafio.routes.js';
+import desafioRoutes from './routes/openai.routes.js';
 
 import usersInfos from './routes/users.routes.js';
 

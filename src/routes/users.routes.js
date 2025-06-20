@@ -1,3 +1,7 @@
+/**
+ * Rota para acesso aos usuarios, contendo endpoits para registro, consultas, atualizações e feedbacks enviado
+ */
+
 import express from 'express';
 import jwt from 'jsonwebtoken';
 import { verifyToken } from '../middlewares/auth.middleware.js';
