@@ -55,25 +55,21 @@ export function getUserByUsername(username, callback) {
 
 // Atualizar os Pontos e vidas dos jogadores
 export function updateUserData(username, life, points, callback) {
-    if (life != null && points == null) {
-        const sql = `UPDATE users SET life = life + ? WHERE username = ?`;
-        bd.query(sql, [life, username], (err, result) => {
-            if (err) return callback(err);
-            callback(null, result);
-        });
-    } else if (points != null && life == null) {
-        const sql = `UPDATE users SET points = points + ? WHERE username = ?`;
-        bd.query(sql, [points, username], (err, result) => {
-            if (err) return callback(err);
-            callback(null, result);
-        });
-    } else if (life != null && points != null) {
-        const sql = `UPDATE users SET life = life + ?, points = points + ? WHERE username = ?`;
-        bd.query(sql, [life, points, username], (err, result) => {
+
+    let sql = `UPDATE users SET life = life + ?, points = points + ? WHERE username = ?`;
+
+    if (points == 0 && life == 0) {
+        sql = `UPDATE users SET life = 5, points = 0 WHERE username = ?`
+        bd.query(sql, [username], (err, result) => {
             if (err) return callback(err);
             callback(null, result);
         });
     } else {
-        callback(new Error("Informe pelo menos life ou points para atualizar."));
+        bd.query(sql, [life, points, username], (err, result) => {
+            if (err) return callback(err);
+            callback(null, result);
+        });
+
     }
+    
 }

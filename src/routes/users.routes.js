@@ -108,8 +108,8 @@ router.get('/private', verifyToken, (req, res) => {
             usuario: {
                 id: usuario.id,
                 username: usuario.username,
-                life: `${usuario.life} Vidas`,
-                points: `${usuario.points} Pts`
+                life: usuario.life,
+                points: usuario.points
             }
         });
     });
